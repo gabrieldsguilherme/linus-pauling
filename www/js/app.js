@@ -6,29 +6,29 @@ $(document).ready(function() {
 
 function continuar() {
     'use strict';
-    var eletrons = getNumeroEletrons();
+    let eletrons = getNumeroEletrons();
 
     if (eletrons === undefined || eletrons == null || eletrons == '') {
         Materialize.toast('Preencha o número de Elétrons!', 3000);
-    } else if (eletrons < 1 || eletrons > 112) {
+    } else if (eletrons < 1 || eletrons > 112 || eletrons % 1 != 0) {
         Materialize.toast('Valor não existente no diagrama!', 3000);
         $('#eletrons').text('');
     } else {
-        var elementos = getElementos();
-        var ordemEnergetica = '';
-        var ordemGeometrica = [];
-        var ordemGeometricaFormatada = '';
-        var eletronsPorCamada = inicializaEletronsPorCamada();
-        var eletronsParaAdicionarNaCamada = 0;
-        var eletronsPorCamadaFormatado = '';
-        var subnivelMaisEnergetico = '';
-        var camadaValencia = '';
+        let elementos = getElementos();
+        let ordemEnergetica = '';
+        let ordemGeometrica = [];
+        let ordemGeometricaFormatada = '';
+        let eletronsPorCamada = inicializaEletronsPorCamada();
+        let eletronsParaAdicionarNaCamada = 0;
+        let eletronsPorCamadaFormatado = '';
+        let subnivelMaisEnergetico = '';
+        let camadaValencia = '';
 
-        var i = 0;
-        var total = 0;
+        let i = 0;
+        let total = 0;
 
         while (eletrons > total) {
-            var elemento = '';
+            let elemento = '';
             elemento += elementos[i][0] + elementos[i][1];
 
             if (eletrons > total + elementos[i][2]) {
@@ -58,15 +58,7 @@ function continuar() {
         eletronsPorCamadaFormatado = getEletronsPorCamada(eletronsPorCamada);
         camadaValencia = getUltimaCamada(eletronsPorCamada);
 
-        $('#oe').text(ordemEnergetica);
-        $('#og').text(ordemGeometricaFormatada);
-        $('#epc').text(eletronsPorCamadaFormatado);
-        $('#sme').text(subnivelMaisEnergetico);
-        $('#cv').text(camadaValencia);
-
-        $('#resultado').show('500');
-        $('#refazer').show('150');
-        $('#continuarDiv').hide('150');
+        exibirResultados(ordemEnergetica, ordemGeometricaFormatada, eletronsPorCamadaFormatado, subnivelMaisEnergetico, camadaValencia);
     }
 }
 
@@ -128,9 +120,9 @@ function getElementoParaCamada(ordemGeometrica, elemento) {
 
 function formatarENomearCamadas(ordemGeometrica) {
     'use strict';
-    var ordemGeometricaFormatada = '';
-    var nomesCamadas = getNomesCamadas();
-    for (var i = 0; i < ordemGeometrica.length; i++) {
+    let ordemGeometricaFormatada = '';
+    let nomesCamadas = getNomesCamadas();
+    for (let i = 0; i < ordemGeometrica.length; i++) {
         ordemGeometricaFormatada += nomesCamadas[i] + ': ' + ordemGeometrica[i];
         if (i + 1 < ordemGeometrica.length) {
             ordemGeometricaFormatada += ' | ';
@@ -149,8 +141,8 @@ function getEletronsParaAdicionarNaCamada(elemento) {
 
 function getEletronsPorCamada(eletronsPorCamada) {
     'use strict';
-    var eletronsPorCamadaFormatado = '';
-    for (var i = 0; i < eletronsPorCamada.length; i++) {
+    let eletronsPorCamadaFormatado = '';
+    for (let i = 0; i < eletronsPorCamada.length; i++) {
         if (eletronsPorCamada[i] > 0) {
             eletronsPorCamadaFormatado += getNomesCamadas()[i] + ': ' + eletronsPorCamada[i];
             if (eletronsPorCamada[i+1] > 0) {
@@ -165,11 +157,23 @@ function getEletronsPorCamada(eletronsPorCamada) {
 
 function getUltimaCamada(eletronsPorCamada) {
     'use strict';
-    for (var i = 0; i < eletronsPorCamada.length; i++) {
+    for (let i = 0; i < eletronsPorCamada.length; i++) {
         if (eletronsPorCamada[i] == 0) {
             return 'Camada ' + getNomesCamadas()[i-1] + '.';
-        } else if (i+1 >= eletronsPorCamada.length) {
+        } else if (i + 1 >= eletronsPorCamada.length) {
             return 'Camada ' + getNomesCamadas()[i] + '.';
         }
     }
+}
+
+function exibirResultados(ordemEnergetica, ordemGeometricaFormatada, eletronsPorCamadaFormatado, subnivelMaisEnergetico, camadaValencia) {
+    $('#oe').text(ordemEnergetica);
+    $('#og').text(ordemGeometricaFormatada);
+    $('#epc').text(eletronsPorCamadaFormatado);
+    $('#sme').text(subnivelMaisEnergetico);
+    $('#cv').text(camadaValencia);
+
+    $('#resultado').show('500');
+    $('#refazer').show('150');
+    $('#continuarDiv').hide('150');
 }
