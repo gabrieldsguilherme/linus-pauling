@@ -1,1 +1,1 @@
-This is a Cordova Application that calculates some things to Linus Pauling exercises
+This is a Cordova Application that calculates some Linus Pauling exercises.
