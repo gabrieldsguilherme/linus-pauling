@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8" />
+
+        <link href="icons/material.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/materialize.min.css">
+        <link rel="stylesheet" href="css/index.css">
+        
+        <script src="js/jquery/jquery-2.2.1.min.js"></script>
+        <script src="js/materialize/materialize.min.js"></script>
+        <script src="js/app.js"></script>
+
+        <title>Linus Pauling</title>
+    </head>
+
+    <body>
+        <nav>
+            <div class="brand-logo blue z-depth-2" id="nav-topo">
+                <b id="texto-topo">linus</b>
+            </div>
+        </nav>
+        <div id="form-input-eletrons">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="eletrons" type="number">
+                        <label for="eletrons">Número de Elétrons</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row center-align" id="continuarDiv">
+            <a class="btn waves-effect waves-light blue z-depth-2" id="continuar" onclick="continuar()">
+                <i class="material-icons right">play_arrow</i>
+                Continuar
+            </a>
+        </div>
+
+        <ul class="collapsible popout" id="resultado" data-collapsible="accordion" id="resultado">
+            <li>
+                <div class="collapsible-header">Ordem Energética</div>
+                <div class="collapsible-body"><p id="oe"></p></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Ordem Geométrica</div>
+                <div class="collapsible-body"><p id="og"></p></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Elétrons por Camada</div>
+                <div class="collapsible-body"><p id="epc"></p></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Subnível Mais Energético</div>
+                <div class="collapsible-body"><p id="sme"></p></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Camada de Valência</div>
+                <div class="collapsible-body"><p id="cv"></p></div>
+            </li>
+        </ul>
+
+        <div class="fixed-action-btn" id="refazer">
+            <a class="btn-floating btn-large waves-effect waves-light blue z-depth-2" onclick="refazer()">
+                <i class="large material-icons">replay</i>
+            </a>
+        </div>
+
+        <script>
+            $('#eletrons').keyup(function(tecla) {
+                if (tecla.keyCode == 8) {
+                    $('#resultado').hide('500');
+                    $('#continuarDiv').show('500');
+                    $('#refazer').hide('150');
+                }
+            });
+        </script>
+    </body>
+</html>

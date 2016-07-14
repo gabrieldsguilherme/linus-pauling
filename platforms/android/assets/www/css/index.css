@@ -1,0 +1,41 @@
+html {
+	font-family: Verdana;
+	background-color: #eeeeee;
+}
+
+#nav-topo {
+	position: fixed;
+	width: 100%;
+}
+
+#texto-topo {
+	font-family: Courier New;
+	font-size: 30px;
+	margin-left: 15px;
+}
+
+#form-input-eletrons {
+	padding-top: 25px;
+}
+
+.input-field label, .input-field input, .input-field input[type=number]:focus + label {
+	color: #2196f3;
+}
+
+.input-field input[type=number]:focus {
+	border-bottom: 1px solid #2196f3;
+	box-shadow: 0 1px 0 0 #2196f3;
+}
+
+#resultado {
+	margin: 0 10px 30px 10px;
+}
+
+#resultado #oe, #resultado #og, #resultado #epc, #resultado #sme, #resultado #cv {
+	background-color: #e3f2fd;
+}
+
+#refazer {
+	bottom: 15px;
+	right: 15px;
+}
